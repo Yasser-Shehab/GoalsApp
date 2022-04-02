@@ -11,7 +11,12 @@ function Register() {
 
   const { name, email, password, password2 } = formData;
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +38,7 @@ function Register() {
               type="text"
               className="form-control"
               id="name"
+              name="name"
               value={name}
               placeholder="Enter your Name"
               onChange={onChange}
@@ -43,6 +49,7 @@ function Register() {
               type="email"
               className="form-control"
               id="email"
+              name="email"
               value={email}
               placeholder="Enter your email"
               onChange={onChange}
@@ -53,6 +60,7 @@ function Register() {
               type="password"
               className="form-control"
               id="password"
+              name="password"
               value={password}
               placeholder="Enter your password"
               onChange={onChange}
@@ -63,6 +71,7 @@ function Register() {
               type="password"
               className="form-control"
               id="password2"
+              name="password2"
               value={password2}
               placeholder="confrim password"
               onChange={onChange}
