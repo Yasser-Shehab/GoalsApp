@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv").config();
 const app = express();
 const colos = require("colors");
@@ -10,6 +11,7 @@ const userRouter = require("./routes/userRoutes");
 
 connectDB();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
