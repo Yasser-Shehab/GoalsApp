@@ -55,14 +55,14 @@ const updateGoals = asyncHandler(async (req, res) => {
 //@route delete /api/goals
 //@access Private
 const deleteGoals = asyncHandler(async (req, res) => {
-  const goal = await Goal.findByIdAndRemove(req.params.id);
+  const goal = await Goal.findById(req.params.id);
   if (!goal) {
     res.status(400);
     throw new Error("Can't Find Goal");
   }
 
   //Check For user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User not found");
   }
@@ -72,7 +72,9 @@ const deleteGoals = asyncHandler(async (req, res) => {
     throw new Error("User not authrorized");
   }
 
-  res.status(200).json({ message: `Deleted goal ${req.params.id}` });
+  await goal.remove();
+
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
